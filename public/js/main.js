@@ -1,7 +1,16 @@
 const chatForm = document.getElementById('chat-form');
 const chatMessages = document.querySelector('.chat-messages');
+const userList = document.getElementById('users');
+
+//get username from URL
+const {username} = Qs.parse(location.search, {
+    ignoreQueryPrefix: true
+});
 
 const socket = io();
+
+// join chat
+socket.emit('joinChat', {username});
 
 //message from server
 socket.on('message', message => {
@@ -9,6 +18,10 @@ socket.on('message', message => {
     outputMessage(message);
 
     chatMessages.scrollTop = chatMessages.scrollHeight;
+});
+
+socket.on('currentUsers', ({users}) => {
+    outputUsers(users);
 });
 
 //Message submit
@@ -35,4 +48,11 @@ function outputMessage(message) {
     </p>`;
 
     document.querySelector('.chat-messages').appendChild(div);
+}
+
+function outputUsers(users) {
+    // console.log(users);
+    userList.innerHTML = `
+        ${users.map(user => `<li>${user.username}</li>`).join('')}
+    `;
 }
