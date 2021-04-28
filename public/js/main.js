@@ -24,6 +24,12 @@ socket.on('currentUsers', ({users}) => {
     outputUsers(users);
 });
 
+socket.on('currentUser', () => {
+    const temp = document.getElementById('user');
+    temp.innerHTML = `<li>${username}</li><br>`;
+});
+
+
 //Message submit
 chatForm.addEventListener('submit', (e) => {
     e.preventDefault();

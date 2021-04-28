@@ -32,6 +32,7 @@ io.on('connection', socket => {
         io.emit('currentUsers', {
             users: getAllUsers()
         });
+        io.emit('currentUser', {});
     
     });
     
