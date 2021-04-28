@@ -1,1 +1,1 @@
-A simple chatting app using socket.io and Express
+A simple chatting app using socket.io and Express.
